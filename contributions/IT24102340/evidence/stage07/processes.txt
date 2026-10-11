@@ -1,0 +1,29 @@
+BLACKOUT INCIDENT - PROCESS INVENTORY
+======================================
+
+PID     USER       COMMAND
+-----------------------------------------------
+1       root       /sbin/init
+742     root       /usr/sbin/sshd
+1084    root       /usr/bin/blackout-sync --service
+1842    analyst    /opt/blackout/blackout-sync --worker
+1907    analyst    /usr/bin/bash
+1934    analyst    /usr/bin/python3 /tmp/collector.py
+
+Suspicious observations:
+
+PID 1084:
+    User: root
+    Executable: /usr/bin/blackout-sync
+    Parent: system service
+
+PID 1842:
+    User: analyst
+    Executable: /opt/blackout/blackout-sync
+    Location differs from the system service executable.
+
+Analyst question:
+
+Why can the low-privileged account execute a BLACKOUT-related component
+from /opt/blackout/, and why does a root-owned service reference the same
+directory?

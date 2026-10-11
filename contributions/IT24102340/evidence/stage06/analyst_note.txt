@@ -1,0 +1,45 @@
+BLACKOUT INCIDENT - MEMORY FORENSICS ANALYST NOTE
+==================================================
+
+Case Reference:
+BLACKOUT-MEM-06
+
+Artifact Assessment:
+--------------------
+The supplied artifact is a Linux ELF x86-64 process core dump
+associated with the suspicious BLACKOUT loader process.
+
+Investigation Objective:
+------------------------
+Determine whether the process represented by the core dump is the
+malicious BLACKOUT loader and recover the memory-resident encoded
+artifact.
+
+Investigation Guidance:
+-----------------------
+1. Confirm the artifact type using file.
+2. Inspect readable memory-resident strings from the core dump.
+3. Correlate the host, task, target, server, port, user-agent and
+   execution interval.
+4. Run the supplied YARA rule against the core dump.
+5. After YARA confirms the BLACKOUT loader indicators, use GDB to
+   inspect the process core together with the recovered executable.
+6. The encoded artifact is stored in a memory variable named
+   memory_blob.
+7. Inspect the value of memory_blob from the core dump.
+8. Identify the encoding and decode the recovered value.
+
+Observed Indicators:
+--------------------
+Host: OPS-WS-17
+Task: C2_TASK=COLLECT
+Target: /var/log/auth.log
+Server: cdn-sync.blackout-update.net
+Port: 8080
+User-Agent: BlackoutUpdater/1.4
+Interval: 45 seconds
+
+Important:
+---------
+The final flag is not provided as plaintext in the evidence.
+Recover the encoded value from process memory before decoding it.

@@ -1,0 +1,37 @@
+OPERATION BLACKOUT - DYNAMIC ANALYSIS
+=====================================
+
+The executable was executed locally during controlled analysis.
+
+Observed startup message:
+
+    BLACKOUT LOADER v1.0
+
+The program requests:
+
+    Enter validation token:
+
+Incorrect input produces:
+
+    VALIDATION FAILED
+
+Correctly reconstructed input produces:
+
+    VALIDATION ACCEPTED
+    BLACKOUT CASE: FINAL-08
+
+Network connectivity is not required for validation.
+
+The program performs local input processing followed by a comparison
+against an embedded expected value.
+
+Analyst conclusion:
+
+The successful execution confirms that the recovered validation
+logic is correct.
+
+The output:
+
+    BLACKOUT CASE: FINAL-08
+
+is the key final-stage investigation result.

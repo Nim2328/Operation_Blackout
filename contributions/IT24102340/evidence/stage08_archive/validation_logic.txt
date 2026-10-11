@@ -1,0 +1,36 @@
+OPERATION BLACKOUT - VALIDATION LOGIC
+=====================================
+
+Reverse-engineering finding:
+
+Each input byte is transformed using XOR with:
+
+    0x13
+
+The relevant transformation can be represented as:
+
+    transformed[i] = input[i] XOR 0x13
+
+The executable contains the following expected bytes:
+
+    5d 56 5a 5f 5a 5f 7e 7b 7a 5d 5e 59 7b 7f 7e
+
+Because XOR is reversible, the original input can be recovered by
+applying XOR 0x13 to each byte.
+
+Recovered validation token:
+
+    NEILILmhiNMJhlm
+
+Verification result:
+
+    VALIDATION ACCEPTED
+    BLACKOUT CASE: FINAL-08
+
+Important:
+
+NEILILmhiNMJhlm is the validation token.
+
+It is NOT the final Stage 08 flag.
+
+The final flag must be derived from the confirmed BLACKOUT case result.

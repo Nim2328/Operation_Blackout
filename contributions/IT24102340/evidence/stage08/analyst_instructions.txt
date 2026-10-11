@@ -1,0 +1,35 @@
+BLACKOUT INCIDENT - REVERSE ENGINEERING NOTES
+==============================================
+
+Artifact:
+    blackout_loader
+
+Recommended investigation workflow:
+
+1. Identify the executable format:
+       file blackout_loader
+
+2. Inspect readable strings:
+       strings -n 5 blackout_loader
+
+3. Execute the program in the isolated lab environment and
+   observe its normal behaviour.
+
+4. Trace relevant library/system interactions:
+       ltrace ./blackout_loader
+       strace ./blackout_loader
+
+5. Inspect the ELF and disassembly:
+       readelf -h blackout_loader
+       objdump -d -M intel blackout_loader
+
+6. Use GDB to inspect functions, comparisons and control flow:
+       gdb ./blackout_loader
+
+Investigation objective:
+
+Determine how the recovered BLACKOUT loader validates its
+input. Recover the required transformation or validation
+condition from the executable itself.
+
+Do not rely on the filename or guess the final flag.

@@ -1,0 +1,12 @@
+[Unit]
+Description=BLACKOUT Synchronization Service
+After=network.target
+
+[Service]
+Type=simple
+User=root
+ExecStart=/opt/blackout/blackout-sync --service
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
