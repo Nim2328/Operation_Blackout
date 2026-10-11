@@ -1,0 +1,1761 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Stage {{ "%02d"|format(stage.stage_number) }} |
+        Operation Blackout
+    </title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: #080d12;
+            color: #d8e1e8;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .container {
+            width: 92%;
+            max-width: 1050px;
+            margin: 45px auto;
+        }
+
+
+        /* =========================
+           HEADER
+        ========================== */
+
+        .header {
+            background: #0d151d;
+            border: 1px solid #263746;
+            padding: 28px;
+            margin-bottom: 20px;
+        }
+
+        .brand {
+            margin: 0;
+            font-size: 30px;
+            letter-spacing: 3px;
+            color: #f1f5f9;
+        }
+
+        .stage-title {
+            margin-top: 12px;
+            font-size: 22px;
+            color: #7dd3fc;
+            letter-spacing: 1px;
+        }
+
+        .domain {
+            margin-top: 12px;
+            font-size: 13px;
+            color: #8fa1b2;
+            letter-spacing: 2px;
+        }
+
+        .investigator {
+            margin-top: 8px;
+            font-size: 13px;
+            color: #7f91a2;
+        }
+
+
+        /* =========================
+           CARDS
+        ========================== */
+
+        .card {
+            background: #0d151d;
+            border: 1px solid #263746;
+            padding: 25px;
+            margin-bottom: 20px;
+        }
+
+        .card h3 {
+            margin-top: 0;
+            margin-bottom: 15px;
+            color: #e6edf3;
+            letter-spacing: 1px;
+        }
+
+        .description {
+            color: #b7c4cf;
+            line-height: 1.8;
+        }
+
+
+        /* =========================
+           STATUS
+        ========================== */
+
+        .status-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .status-box {
+            background: #080e14;
+            border: 1px solid #263746;
+            padding: 20px;
+        }
+
+        .status-label {
+            font-size: 11px;
+            color: #718295;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        .status-value {
+            margin-top: 8px;
+            font-size: 19px;
+            font-weight: bold;
+            color: #e2e8f0;
+        }
+
+
+        /* =========================
+           MESSAGES
+        ========================== */
+
+        .message {
+            padding: 16px 20px;
+            margin-bottom: 20px;
+            border: 1px solid #334155;
+            background: #0d151d;
+            line-height: 1.6;
+        }
+
+        .message.success {
+            border-color: #22c55e;
+            background: #0a1c12;
+            color: #86efac;
+        }
+
+        .message.error {
+            border-color: #ef4444;
+            background: #1d0b0b;
+            color: #fca5a5;
+        }
+
+        .message.info {
+            border-color: #3b82f6;
+            background: #0b1726;
+            color: #93c5fd;
+        }
+
+
+        /* =========================
+           EVIDENCE
+        ========================== */
+
+        .evidence-intro {
+            color: #aebdca;
+            line-height: 1.7;
+            margin-bottom: 18px;
+        }
+
+        .evidence-list {
+            display: grid;
+            gap: 12px;
+            margin-top: 18px;
+        }
+
+        .evidence-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            padding: 16px 18px;
+            background: #080e14;
+            border: 1px solid #263746;
+        }
+
+        .evidence-info {
+            min-width: 0;
+        }
+
+        .evidence-number {
+            font-size: 11px;
+            color: #718295;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        .evidence-name {
+            margin-top: 5px;
+            color: #dce6ee;
+            font-weight: bold;
+            word-break: break-word;
+        }
+
+        .evidence-description {
+            margin-top: 5px;
+            color: #8495a5;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .evidence-link {
+            display: inline-block;
+            flex-shrink: 0;
+            padding: 11px 17px;
+            background: #102338;
+            border: 1px solid #3b82f6;
+            color: #93c5fd;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 13px;
+            letter-spacing: 0.5px;
+        }
+
+        .evidence-link:hover {
+            background: #173554;
+        }
+
+
+        /* =========================
+           SUBMIT FLAG
+        ========================== */
+
+        .submit-description {
+            color: #9cacba;
+            line-height: 1.7;
+            font-size: 14px;
+        }
+
+        label {
+            display: block;
+            margin-top: 20px;
+            margin-bottom: 9px;
+            color: #d4dde5;
+            font-size: 14px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            max-width: 650px;
+            padding: 14px 16px;
+            background: #070c11;
+            border: 1px solid #334155;
+            color: #f8fafc;
+            font-size: 15px;
+            outline: none;
+        }
+
+        input[type="text"]:focus {
+            border-color: #3b82f6;
+        }
+
+        button {
+            margin-top: 15px;
+            padding: 13px 22px;
+            background: #102338;
+            border: 1px solid #3b82f6;
+            color: #bfdbfe;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #173554;
+        }
+
+
+        /* =========================
+           COMPLETED
+        ========================== */
+
+        .completed-card {
+            border-color: #22c55e;
+        }
+
+        .completed-title {
+            color: #86efac !important;
+        }
+
+        .next-stage {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 13px 20px;
+            background: #0d2417;
+            border: 1px solid #22c55e;
+            color: #86efac;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .next-stage:hover {
+            background: #123a21;
+        }
+
+
+        /* =========================
+           BACK
+        ========================== */
+
+        .back {
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .back:hover {
+            color: #e2e8f0;
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================== */
+
+        @media (max-width: 700px) {
+
+            .container {
+                width: 94%;
+                margin: 25px auto;
+            }
+
+            .status-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .brand {
+                font-size: 24px;
+            }
+
+            .stage-title {
+                font-size: 18px;
+            }
+
+            .evidence-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .evidence-link {
+                width: 100%;
+                text-align: center;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="container">
+
+
+    <!-- =========================
+         HEADER
+    ========================== -->
+
+    <div class="header">
+
+        <h1 class="brand">
+            OPERATION BLACKOUT
+        </h1>
+
+        <div class="stage-title">
+
+            STAGE {{ "%02d"|format(stage.stage_number) }}
+            —
+            {{ stage.name }}
+
+        </div>
+
+        <div class="domain">
+
+            DOMAIN:
+            {{ stage.domain }}
+
+        </div>
+
+        <div class="investigator">
+
+            Investigator:
+            {{ user.username }}
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =========================
+         INVESTIGATION OBJECTIVE
+    ========================== -->
+
+    <div class="card">
+
+        <h3>
+            Investigation Objective
+        </h3>
+
+        <p class="description">
+
+            {{ stage.description }}
+
+        </p>
+
+    </div>
+
+
+
+    <!-- =========================
+         SERVER RESPONSE MESSAGE
+    ========================== -->
+
+    {% if message %}
+
+        {% if message_type == "success" %}
+
+            <div class="message success">
+
+                <strong>
+                    {{ message }}
+                </strong>
+
+            </div>
+
+        {% elif message_type == "error" %}
+
+            <div class="message error">
+
+                <strong>
+                    {{ message }}
+                </strong>
+
+            </div>
+
+        {% else %}
+
+            <div class="message info">
+
+                <strong>
+                    {{ message }}
+                </strong>
+
+            </div>
+
+        {% endif %}
+
+    {% endif %}
+
+
+
+    <!-- =========================
+         INVESTIGATION EVIDENCE
+    ========================== -->
+
+    <div class="card">
+
+        <h3>
+            Investigation Evidence
+        </h3>
+
+        <p class="evidence-intro">
+
+            Review the available intelligence evidence
+            and correlate the indicators before submitting
+            your flag.
+
+        </p>
+
+
+
+        <!-- =========================
+             STAGE 01
+        ========================== -->
+
+        {% if stage.stage_number == 1 %}
+
+        <div class="evidence-list">
+
+
+            <!-- Evidence 01 -->
+
+            <div class="evidence-item">
+
+                <div class="evidence-info">
+
+                    <div class="evidence-number">
+                        Evidence 01
+                    </div>
+
+                    <div class="evidence-name">
+                        Evidence Index
+                    </div>
+
+                    <div class="evidence-description">
+                        Investigation evidence catalogue
+                        and task instructions.
+                    </div>
+
+                </div>
+
+                <a
+                    class="evidence-link"
+                    href="{{ url_for(
+                        'static',
+                        filename='evidence/stage01/evidence_index.txt'
+                    ) }}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Open Evidence
+                </a>
+
+            </div>
+
+
+
+            <!-- Evidence 02 -->
+
+            <div class="evidence-item">
+
+                <div class="evidence-info">
+
+                    <div class="evidence-number">
+                        Evidence 02
+                    </div>
+
+                    <div class="evidence-name">
+                        Intelligence Brief
+                    </div>
+
+                    <div class="evidence-description">
+                        Initial BLACKOUT intelligence
+                        and known infrastructure indicators.
+                    </div>
+
+                </div>
+
+                <a
+                    class="evidence-link"
+                    href="{{ url_for(
+                        'static',
+                        filename='evidence/stage01/intelligence_brief.txt'
+                    ) }}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Open Evidence
+                </a>
+
+            </div>
+
+
+
+            <!-- Evidence 03 -->
+
+            <div class="evidence-item">
+
+                <div class="evidence-info">
+
+                    <div class="evidence-number">
+                        Evidence 03
+                    </div>
+
+                    <div class="evidence-name">
+                        Incident Note
+                    </div>
+
+                    <div class="evidence-description">
+                        Incident timeline context
+                        and recovered infrastructure indicators.
+                    </div>
+
+                </div>
+
+                <a
+                    class="evidence-link"
+                    href="{{ url_for(
+                        'static',
+                        filename='evidence/stage01/incident_note.txt'
+                    ) }}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Open Evidence
+                </a>
+
+            </div>
+
+
+
+            <!-- Evidence 04 -->
+
+            <div class="evidence-item">
+
+                <div class="evidence-info">
+
+                    <div class="evidence-number">
+                        Evidence 04
+                    </div>
+
+                    <div class="evidence-name">
+                        Passive DNS Collection
+                    </div>
+
+                    <div class="evidence-description">
+                        Historical DNS observations used
+                        to establish infrastructure activity.
+                    </div>
+
+                </div>
+
+                <a
+                    class="evidence-link"
+                    href="{{ url_for(
+                        'static',
+                        filename='evidence/stage01/passive_dns.txt'
+                    ) }}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Open Evidence
+                </a>
+
+            </div>
+
+
+
+            <!-- Evidence 05 -->
+
+            <div class="evidence-item">
+
+                <div class="evidence-info">
+
+                    <div class="evidence-number">
+                        Evidence 05
+                    </div>
+
+                    <div class="evidence-name">
+                        TLS Certificate Analysis
+                    </div>
+
+                    <div class="evidence-description">
+                        Certificate metadata connecting
+                        an infrastructure indicator to the case.
+                    </div>
+
+                </div>
+
+                <a
+                    class="evidence-link"
+                    href="{{ url_for(
+                        'static',
+                        filename='evidence/stage01/certificate_notes.txt'
+                    ) }}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Open Evidence
+                </a>
+
+            </div>
+
+
+        </div>
+
+
+
+
+
+            <!-- Evidence 06: Asset Registry -->
+
+            <div class="evidence-item">
+                <div class="evidence-info">
+                    <div class="evidence-number">Evidence 06</div>
+                    <div class="evidence-name">Asset Registry Extract</div>
+                    <div class="evidence-description">
+                        Corroborate the infrastructure role using the
+                        fictional asset registry and existing DNS/TLS evidence.
+                    </div>
+                </div>
+
+                <a
+                    class="evidence-link"
+                    href="{{ url_for(
+                        'static',
+                        filename='evidence/stage01/asset_registry.txt'
+                    ) }}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Open Evidence
+                </a>
+            </div>
+
+        <!-- =========================
+             STAGE 02
+        ========================== -->
+
+        {% elif stage.stage_number == 2 %}
+
+        <div class="evidence-list">
+
+
+            <!-- Stage 02 Evidence 01 -->
+
+            <div class="evidence-item">
+
+                <div class="evidence-info">
+
+                    <div class="evidence-number">
+                        Evidence 01
+                    </div>
+
+                    <div class="evidence-name">
+                        Suspicious Image — BLACKOUT-002
+                    </div>
+
+                    <div class="evidence-description">
+
+                        PNG evidence recovered from the
+                        BLACKOUT incident. Analyze the image
+                        carefully and investigate it for
+                        hidden information.
+
+                    </div>
+
+                </div>
+
+                <a
+                    class="evidence-link"
+                    href="{{ url_for(
+                        'static',
+                        filename='evidence/stage02/blackout_evidence.png'
+                    ) }}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Open Evidence
+                </a>
+
+            </div>
+
+
+        </div>
+
+        <!-- =========================
+             STAGE 03
+        ========================== -->
+
+        {% elif stage.stage_number == 3 %}
+
+        <div class="evidence-list">
+
+
+            <!-- Stage 03 Evidence 01 -->
+
+            <div class="evidence-item">
+
+                <div class="evidence-info">
+
+                    <div class="evidence-number">
+                        Evidence 01
+                    </div>
+
+                    <div class="evidence-name">
+                        Recovered Encrypted Communication
+                    </div>
+
+                    <div class="evidence-description">
+
+                        Encrypted communication recovered from
+                        the hidden data extracted during the
+                        previous investigation stage.
+
+                    </div>
+
+                </div>
+
+                <a
+                    class="evidence-link"
+                    href="{{ url_for(
+                        'static',
+                        filename='evidence/stage03/encrypted_communication.txt'
+                    ) }}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Open Evidence
+                </a>
+
+            </div>
+
+
+            <!-- Stage 03 Evidence 02 -->
+
+            <div class="evidence-item">
+
+                <div class="evidence-info">
+
+                    <div class="evidence-number">
+                        Evidence 02
+                    </div>
+
+                    <div class="evidence-name">
+                        Cryptographic Analyst Note
+                    </div>
+
+                    <div class="evidence-description">
+
+                        Analyst observations describing the
+                        encryption characteristics and the
+                        investigation objective.
+
+                    </div>
+
+                </div>
+
+                <a
+                    class="evidence-link"
+                    href="{{ url_for(
+                        'static',
+                        filename='evidence/stage03/analyst_note.txt'
+                    ) }}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Open Evidence
+                </a>
+
+            </div>
+
+
+            <!-- Stage 03 Evidence 03 -->
+
+            <div class="evidence-item">
+
+                <div class="evidence-info">
+
+                    <div class="evidence-number">
+                        Evidence 03
+                    </div>
+
+                    <div class="evidence-name">
+                        Cipher Reference
+                    </div>
+
+                    <div class="evidence-description">
+
+                        Historical cipher reference containing
+                        the transformation clue required to
+                        decrypt the recovered communication.
+
+                    </div>
+
+                </div>
+
+                <a
+                    class="evidence-link"
+                    href="{{ url_for(
+                        'static',
+                        filename='evidence/stage03/cipher_reference.txt'
+                    ) }}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Open Evidence
+                </a>
+
+            </div>
+
+
+            <!-- Stage 03 Evidence 04 -->
+
+            <div class="evidence-item">
+
+                <div class="evidence-info">
+
+                    <div class="evidence-number">
+                        Evidence 04
+                    </div>
+
+                    <div class="evidence-name">
+                        Stage 03 Evidence Index
+                    </div>
+
+                    <div class="evidence-description">
+
+                        Investigation index describing the required
+                        analysis sequence and flag construction.
+
+                    </div>
+
+                </div>
+
+                <a
+                    class="evidence-link"
+                    href="{{ url_for(
+                        'static',
+                        filename='evidence/stage03/evidence_index.txt'
+                    ) }}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Open Evidence
+                </a>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- =========================
+             STAGE 04
+        ========================== -->
+
+        {% elif stage.stage_number == 4 %}
+
+        <div class="evidence-list">
+
+
+            <!-- Stage 04 Evidence 01 -->
+
+            <div class="evidence-item">
+
+                <div class="evidence-info">
+
+                    <div class="evidence-number">
+                        Evidence 01
+                    </div>
+
+                    <div class="evidence-name">
+                        System Activity Log
+                    </div>
+
+                    <div class="evidence-description">
+
+                        Recovered system events showing
+                        suspicious authentication, temporary
+                        file creation and process execution.
+
+                    </div>
+
+                </div>
+
+                <a
+                    class="evidence-link"
+                    href="{{ url_for(
+                        'static',
+                        filename='evidence/stage04/system_log.txt'
+                    ) }}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Open Evidence
+                </a>
+
+            </div>
+
+
+
+            <!-- Stage 04 Evidence 02 -->
+
+            <div class="evidence-item">
+
+                <div class="evidence-info">
+
+                    <div class="evidence-number">
+                        Evidence 02
+                    </div>
+
+                    <div class="evidence-name">
+                        Browser History
+                    </div>
+
+                    <div class="evidence-description">
+
+                        Recovered browsing activity associated
+                        with the suspicious update package
+                        and remote infrastructure.
+
+                    </div>
+
+                </div>
+
+                <a
+                    class="evidence-link"
+                    href="{{ url_for(
+                        'static',
+                        filename='evidence/stage04/browser_history.txt'
+                    ) }}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Open Evidence
+                </a>
+
+            </div>
+
+
+
+            <!-- Stage 04 Evidence 03 -->
+
+            <div class="evidence-item">
+
+                <div class="evidence-info">
+
+                    <div class="evidence-number">
+                        Evidence 03
+                    </div>
+
+                    <div class="evidence-name">
+                        Recovered Deleted Note
+                    </div>
+
+                    <div class="evidence-description">
+
+                        Partially recovered forensic artefact
+                        containing information about the
+                        suspicious update package and
+                        execution process.
+
+                    </div>
+
+                </div>
+
+                <a
+                    class="evidence-link"
+                    href="{{ url_for(
+                        'static',
+                        filename='evidence/stage04/deleted_note.txt'
+                    ) }}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Open Evidence
+                </a>
+
+            </div>
+
+
+            <!-- Stage 04 Evidence 04 -->
+
+            <div class="evidence-item">
+
+                <div class="evidence-info">
+
+                    <div class="evidence-number">
+                        Evidence 04
+                    </div>
+
+                    <div class="evidence-name">
+                        Recovered Service Artifact
+                    </div>
+
+                    <div class="evidence-description">
+
+                        Recovered service metadata showing the
+                        execution path, restart behaviour and
+                        boot-time installation configuration
+                        associated with the suspicious updater.
+
+                    </div>
+
+                </div>
+
+                <a
+                    class="evidence-link"
+                    href="{{ url_for(
+                        'static',
+                        filename='evidence/stage04/service_artifact.txt'
+                    ) }}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Open Evidence
+                </a>
+
+            </div>
+
+
+            <!-- Stage 04 Evidence 05 -->
+
+            <div class="evidence-item">
+
+                <div class="evidence-info">
+
+                    <div class="evidence-number">
+                        Evidence 05
+                    </div>
+
+                    <div class="evidence-name">
+                        Recovered Updater Binary Dump
+                    </div>
+
+                    <div class="evidence-description">
+
+                        Recovered executable analysis containing
+                        strings, infrastructure indicators and
+                        encoded investigation data.
+
+                    </div>
+
+                </div>
+
+                <a
+                    class="evidence-link"
+                    href="{{ url_for(
+                        'static',
+                        filename='evidence/stage04/updater_binary_dump.txt'
+                    ) }}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Open Evidence
+                </a>
+
+            </div>
+
+
+        </div>
+
+
+
+        {% elif stage.stage_number == 5 %}
+
+        <!-- =========================
+             STAGE 05 - NETWORK ANALYSIS
+        ========================== -->
+
+        <p class="evidence-intro">
+
+            Analyse the captured network traffic and correlate
+            DNS, network flows, TCP payloads, HTTP activity,
+            timing, and indicators to identify the attacker
+            infrastructure.
+
+        </p>
+
+
+        <!-- Stage 05 Evidence 01 -->
+
+        <div class="evidence-item">
+
+            <div class="evidence-info">
+
+                <div class="evidence-number">
+                    Evidence 01
+                </div>
+
+                <div class="evidence-name">
+                    Network Capture
+                </div>
+
+                <div class="evidence-description">
+
+                    Full packet capture containing internal traffic,
+                    DNS activity, repeated external connections,
+                    application-layer communication, task retrieval,
+                    and outbound transfer activity.
+
+                </div>
+
+            </div>
+
+            <a
+                class="evidence-link"
+                href="{{ url_for(
+                    'static',
+                    filename='evidence/stage05/network_capture.pcap'
+                ) }}"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Open Evidence
+            </a>
+
+        </div>
+
+
+        <!-- Stage 05 Evidence 02 -->
+
+        <div class="evidence-item">
+
+            <div class="evidence-info">
+
+                <div class="evidence-number">
+                    Evidence 02
+                </div>
+
+                <div class="evidence-name">
+                    DNS Query Analysis
+                </div>
+
+                <div class="evidence-description">
+
+                    Extracted DNS queries and responses used to
+                    identify the external hostname and its
+                    resolved network address.
+
+                </div>
+
+            </div>
+
+            <a
+                class="evidence-link"
+                href="{{ url_for(
+                    'static',
+                    filename='evidence/stage05/dns_query_analysis.txt'
+                ) }}"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Open Evidence
+            </a>
+
+        </div>
+
+
+        <!-- Stage 05 Evidence 03 -->
+
+        <div class="evidence-item">
+
+            <div class="evidence-info">
+
+                <div class="evidence-number">
+                    Evidence 03
+                </div>
+
+                <div class="evidence-name">
+                    HTTP / TCP Sessions
+                </div>
+
+                <div class="evidence-description">
+
+                    Raw application-layer payloads extracted from
+                    TCP communication with the suspicious external
+                    destination. Payload decoding and stream
+                    analysis are required.
+
+                </div>
+
+            </div>
+
+            <a
+                class="evidence-link"
+                href="{{ url_for(
+                    'static',
+                    filename='evidence/stage05/http_tcp_sessions.txt'
+                ) }}"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Open Evidence
+            </a>
+
+        </div>
+
+
+        <!-- Stage 05 Evidence 04 -->
+
+        <div class="evidence-item">
+
+            <div class="evidence-info">
+
+                <div class="evidence-number">
+                    Evidence 04
+                </div>
+
+                <div class="evidence-name">
+                    Network Flow Records
+                </div>
+
+                <div class="evidence-description">
+
+                    Packet timing, source and destination addresses,
+                    ports, TCP flags, and payload lengths extracted
+                    from the capture for behavioural correlation.
+
+                </div>
+
+            </div>
+
+            <a
+                class="evidence-link"
+                href="{{ url_for(
+                    'static',
+                    filename='evidence/stage05/network_flow_records.txt'
+                ) }}"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Open Evidence
+            </a>
+
+        </div>
+
+
+        <!-- Stage 05 Evidence 05 -->
+
+        <div class="evidence-item">
+
+            <div class="evidence-info">
+
+                <div class="evidence-number">
+                    Evidence 05
+                </div>
+
+                <div class="evidence-name">
+                    Analyst Investigation Note
+                </div>
+
+                <div class="evidence-description">
+
+                    Investigator guidance describing the compromised
+                    workstation, observed communication patterns,
+                    task activity, and outbound transfer behaviour.
+
+                </div>
+
+            </div>
+
+            <a
+                class="evidence-link"
+                href="{{ url_for(
+                    'static',
+                    filename='evidence/stage05/analyst_investigation_note.txt'
+                ) }}"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Open Evidence
+            </a>
+
+        </div>
+
+
+        <!-- Stage 05 Evidence 06 -->
+
+        <div class="evidence-item">
+
+            <div class="evidence-info">
+
+                <div class="evidence-number">
+                    Evidence 06
+                </div>
+
+                <div class="evidence-name">
+                    Network IOC Reference
+                </div>
+
+                <div class="evidence-description">
+
+                    Potential indicators and behavioural characteristics
+                    requiring correlation before determining whether the
+                    communication represents legitimate activity or
+                    attacker command-and-control behaviour.
+
+                </div>
+
+            </div>
+
+            <a
+                class="evidence-link"
+                href="{{ url_for(
+                    'static',
+                    filename='evidence/stage05/network_ioc_reference.txt'
+                ) }}"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Open Evidence
+            </a>
+
+        </div>
+
+
+        <!-- =========================
+             STAGE 06 - MEMORY FORENSICS
+        ========================== -->
+
+        {% elif stage.stage_number == 6 %}
+
+        <div class="evidence-header">
+            <h2>STAGE 06 - MEMORY FORENSICS</h2>
+            <p>
+                Analyse the supplied process-memory artifact and correlate
+                memory-resident indicators with the BLACKOUT investigation.
+            </p>
+        </div>
+
+        <!-- Stage 06 Evidence 01 -->
+        <div class="evidence-card">
+            <div class="evidence-number">01</div>
+            <div class="evidence-content">
+                <h3>Process Core Dump</h3>
+                <p>
+                    Linux ELF x86-64 process core dump associated with the
+                    suspicious BLACKOUT loader process.
+                </p>
+                <span class="evidence-type">ELF CORE</span>
+            </div>
+            <a class="evidence-link"
+               href="{{ url_for('static', filename='evidence/stage06/ops_ws17_loader.core') }}"
+               target="_blank"
+               rel="noopener noreferrer">
+                Open Evidence
+            </a>
+        </div>
+
+        <!-- Stage 06 Evidence 02 -->
+        <div class="evidence-card">
+            <div class="evidence-number">02</div>
+            <div class="evidence-content">
+                <h3>YARA Detection Rule</h3>
+                <p>
+                    YARA rule used to identify correlated BLACKOUT loader
+                    indicators inside the process memory artifact.
+                </p>
+                <span class="evidence-type">YARA RULE</span>
+            </div>
+            <a class="evidence-link"
+               href="{{ url_for('static', filename='evidence/stage06/blackout_loader.yar') }}"
+               target="_blank"
+               rel="noopener noreferrer">
+                Open Evidence
+            </a>
+        </div>
+
+        <!-- Stage 06 Evidence 03 -->
+        <div class="evidence-card">
+            <div class="evidence-number">03</div>
+            <div class="evidence-content">
+                <h3>Analyst Note</h3>
+                <p>
+                    Investigation guidance for correlating memory-resident
+                    indicators and recovering the encoded artifact from
+                    process memory.
+                </p>
+                <span class="evidence-type">ANALYST REPORT</span>
+            </div>
+            <a class="evidence-link"
+               href="{{ url_for('static', filename='evidence/stage06/analyst_note.txt') }}"
+               target="_blank"
+               rel="noopener noreferrer">
+                Open Evidence
+            </a>
+        </div>
+
+        {% elif stage.stage_number == 7 %}
+
+        <!-- =========================
+             STAGE 07 - PRIVILEGE ESCALATION
+        ========================== -->
+
+        <div class="evidence-header">
+            <h2>STAGE 07 - PRIVILEGE ESCALATION</h2>
+            <p>
+                Determine how the attacker obtained elevated privileges by
+                correlating the compromised account, privileged service and
+                filesystem permissions.
+            </p>
+        </div>
+
+        <!-- Stage 07 Evidence 01 -->
+        <div class="evidence-card">
+            <div class="evidence-number">01</div>
+
+            <div class="evidence-content">
+                <h3>Host Triage Report</h3>
+
+                <p>
+                    Initial host investigation identifying the compromised
+                    account, suspicious BLACKOUT process and writable
+                    service directory.
+                </p>
+
+                <span class="evidence-type">
+                    HOST TRIAGE
+                </span>
+            </div>
+
+            <a class="evidence-link"
+               href="{{ url_for('static', filename='evidence/stage07/host_triage.txt') }}"
+               target="_blank"
+               rel="noopener noreferrer">
+                Open Evidence
+            </a>
+        </div>
+
+
+        <!-- Stage 07 Evidence 02 -->
+        <div class="evidence-card">
+            <div class="evidence-number">02</div>
+
+            <div class="evidence-content">
+                <h3>Service Configuration</h3>
+
+                <p>
+                    Systemd service configuration showing a privileged
+                    execution context and the resource executed by the
+                    BLACKOUT synchronization service.
+                </p>
+
+                <span class="evidence-type">
+                    SERVICE ANALYSIS
+                </span>
+            </div>
+
+            <a class="evidence-link"
+               href="{{ url_for('static', filename='evidence/stage07/service_config.txt') }}"
+               target="_blank"
+               rel="noopener noreferrer">
+                Open Evidence
+            </a>
+        </div>
+
+
+        <!-- Stage 07 Evidence 03 -->
+        <div class="evidence-card">
+            <div class="evidence-number">03</div>
+
+            <div class="evidence-content">
+                <h3>Permission Analysis</h3>
+
+                <p>
+                    Filesystem permission evidence showing that the
+                    lower-privileged account can modify the resource used
+                    by the privileged service.
+                </p>
+
+                <span class="evidence-type">
+                    FILESYSTEM PERMISSIONS
+                </span>
+            </div>
+
+            <a class="evidence-link"
+               href="{{ url_for('static', filename='evidence/stage07/permissions.txt') }}"
+               target="_blank"
+               rel="noopener noreferrer">
+                Open Evidence
+            </a>
+        </div>
+
+
+        <!-- =========================
+             STAGE 08 - REVERSE ENGINEERING
+        ========================== -->
+
+        {% elif stage.stage_number == 8 %}
+
+        <div class="evidence-header">
+            <h2>STAGE 08 - REVERSE ENGINEERING</h2>
+            <p>
+                Analyse the recovered BLACKOUT loader and determine the
+                validation logic required to recover the final investigation
+                flag.
+            </p>
+        </div>
+
+
+        <!-- Stage 08 Evidence 01 -->
+        <div class="evidence-card">
+
+            <div class="evidence-number">01</div>
+
+            <div class="evidence-content">
+                <h3>Recovered Binary</h3>
+
+                <p>
+                    Suspicious ELF executable recovered during the final
+                    phase of the BLACKOUT investigation. Analyse the
+                    executable to identify its validation behaviour.
+                </p>
+
+                <span class="evidence-type">
+                    ELF EXECUTABLE
+                </span>
+            </div>
+
+            <a
+                class="evidence-link"
+                href="{{ url_for(
+                    'static',
+                    filename='evidence/stage08/blackout_loader'
+                ) }}"
+                download="blackout_loader"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Open Evidence
+            </a>
+
+        </div>
+
+
+        <!-- Stage 08 Evidence 02 -->
+        <div class="evidence-card">
+
+            <div class="evidence-number">02</div>
+
+            <div class="evidence-content">
+                <h3>Reverse Engineering Notes</h3>
+
+                <p>
+                    Recommended workflow for ELF identification,
+                    string extraction, execution tracing, disassembly
+                    and debugger-based inspection.
+                </p>
+
+                <span class="evidence-type">
+                    REVERSE ENGINEERING
+                </span>
+            </div>
+
+            <a
+                class="evidence-link"
+                href="{{ url_for(
+                    'static',
+                    filename='evidence/stage08/analyst_instructions.txt'
+                ) }}"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Open Evidence
+            </a>
+
+        </div>
+
+
+        <!-- Stage 08 Evidence 03 -->
+        <div class="evidence-card">
+
+            <div class="evidence-number">03</div>
+
+            <div class="evidence-content">
+                <h3>Investigation Brief</h3>
+
+                <p>
+                    Final investigation objective requiring the analyst
+                    to reverse engineer the recovered loader and recover
+                    the validation condition used by the attacker.
+                </p>
+
+                <span class="evidence-type">
+                    INVESTIGATION BRIEF
+                </span>
+            </div>
+
+            <a
+                class="evidence-link"
+                href="{{ url_for(
+                    'static',
+                    filename='evidence/stage08/investigation_brief.txt'
+                ) }}"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Open Evidence
+            </a>
+
+        </div>
+
+
+        <!-- =========================
+             OTHER STAGES
+        ========================== -->
+
+        {% else %}
+
+        <p class="evidence-intro">
+            Evidence for this stage will become available
+            when the stage is unlocked.
+        </p>
+
+        {% endif %}
+
+
+
+    <!-- FLAG SUBMISSION / COMPLETION -->
+    {% if progress.status == "completed" %}
+    <div class="card">
+        <h3>Stage {{ "%02d"|format(stage.stage_number) }} Completed</h3>
+        <p>You have successfully completed this investigation.</p>
+
+        {% if next_stage and next_progress and next_progress.status != "locked" %}
+        <a class="back"
+           href="{{ url_for('stages.stage', stage_number=next_stage.stage_number) }}">
+            NEXT STAGE → {{ next_stage.name }}
+        </a>
+        {% elif not next_stage %}
+        <a class="back" href="{{ url_for('dashboard.dashboard') }}">
+            ← Back to Investigation Dashboard
+        </a>
+        {% else %}
+        <a class="back" href="{{ url_for('dashboard.dashboard') }}">
+            ← Back to Investigation Dashboard
+        </a>
+        {% endif %}
+    </div>
+    {% else %}
+    <div class="card">
+        <h3>Submit Flag</h3>
+        <p class="submit-description">
+            Submit the flag captured during your investigation.
+            Every submission is validated by the CTF platform.
+        </p>
+
+        <form method="POST"
+              action="{{ url_for('stages.stage', stage_number=stage.stage_number) }}">
+            <label for="flag">Enter captured flag:</label>
+            <input
+                type="text"
+                id="flag"
+                name="flag"
+                placeholder="FLAG{...}"
+                autocomplete="off"
+                required
+            >
+            <button type="submit">Submit Flag</button>
+        </form>
+    </div>
+    {% endif %}
+
+<!-- =========================
+         BACK TO DASHBOARD
+    ========================== -->
+
+    <div class="card">
+
+        <a
+            class="back"
+            href="{{ url_for('dashboard.dashboard') }}"
+        >
+            ← Back to Investigation Dashboard
+        </a>
+
+    </div>
+
+
+</div>
+
+</body>
+
+</html>
