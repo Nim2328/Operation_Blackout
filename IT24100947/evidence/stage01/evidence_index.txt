@@ -1,0 +1,39 @@
+OPERATION BLACKOUT — STAGE 01 EVIDENCE INDEX
+=============================================
+
+CASE: BLACKOUT-2026-001
+
+Available Evidence:
+
+[01] incident_note.txt
+     Initial incident context and investigation objective.
+
+[02] passive_dns.txt
+     Historical DNS observations.
+
+[03] certificate_notes.txt
+     TLS certificate analysis.
+
+[04] asset_registry.txt
+     Registry record, asset role, and corroboration status.
+
+INVESTIGATOR TASK
+-----------------
+1. Identify the DNS record active during the incident window.
+2. Correlate its hostname and IP address with the TLS certificate.
+3. Confirm the matching registry record and its status.
+4. Record the registry record ID and certificate serial number.
+
+FLAG CONSTRUCTION
+-----------------
+Use the following format:
+
+FLAG{record_id_certificate_serial}
+
+For the record ID, use the exact identifier shown in the asset
+registry. For the certificate serial, use the exact serial shown
+in the TLS certificate analysis. Convert letters to lowercase
+and replace hyphens with underscores in the final flag.
+
+Do not select an asset based on its hostname alone.
+All required values must be supported by the evidence.

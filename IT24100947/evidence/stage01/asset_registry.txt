@@ -1,0 +1,30 @@
+OPERATION BLACKOUT — ASSET REGISTRY EXTRACT
+===========================================
+
+Case Reference: BLACKOUT-2026-001
+Registry Snapshot: AR-2026-0910
+Classification: FICTIONAL TRAINING DATA
+
+Asset Record AR-014
+-------------------
+Hostname: nightfall-update.example
+Address: 198.51.100.27
+Asset Role: operational_infrastructure
+Record Status: Corroborated
+Reference: PDNS-2026-001 / NF-2026-0910-27
+
+Asset Record AR-022
+-------------------
+Hostname: cdn-nightfall.example
+Address: 203.0.113.44
+Asset Role: transient_delivery_indicator
+Record Status: Uncorroborated
+Reference: PDNS-2026-001
+
+Analyst Instructions
+--------------------
+Correlate the hostname and IP address with the passive DNS and
+TLS certificate records. Confirm the asset role using this registry.
+
+Do not select an indicator based on its hostname alone.
+Record the evidence references that support your conclusion.

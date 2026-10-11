@@ -1,0 +1,43 @@
+OPERATION BLACKOUT — INITIAL INTELLIGENCE BRIEF
+================================================
+
+CASE ID: BLACKOUT-2026-001
+CLASSIFICATION: INTERNAL INVESTIGATION
+
+INCIDENT SUMMARY
+----------------
+At 23:47 UTC, the monitoring team detected an abnormal connection
+associated with the BLACKOUT incident.
+
+The originating activity was not directly attributable to an
+internal workstation.
+
+Investigators believe the attacker used external infrastructure
+before interacting with the compromised environment.
+
+KNOWN IDENTIFIERS
+-----------------
+Campaign Name: NIGHTFALL
+Incident Reference: BLACKOUT-2026-001
+
+Observed Hostnames:
+  nightfall-update.example
+  cdn-nightfall.example
+
+Observed IP Addresses:
+  198.51.100.27
+  203.0.113.44
+
+Analyst Note
+-----------
+One of the external infrastructure indicators is directly associated
+with the NIGHTFALL operation.
+
+Determine the primary infrastructure identifier used by the attacker.
+
+INVESTIGATION OBJECTIVE
+-----------------------
+Identify the external infrastructure connected to the BLACKOUT
+incident.
+
+Submit the appropriate BLACKOUT flag through the investigation portal.
