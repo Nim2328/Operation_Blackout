@@ -1,0 +1,25 @@
+OPERATION BLACKOUT — STAGE 03 EVIDENCE INDEX
+=============================================
+
+CASE: BLACKOUT-2026-001
+
+Available Evidence:
+
+[01] encrypted_communication.txt
+     Recovered encrypted communication.
+
+[02] analyst_note.txt
+     Cryptographic analysis and investigation guidance.
+
+[03] cipher_reference.txt
+     Historical cipher reference and technical clue.
+
+INVESTIGATOR TASK
+-----------------
+1. Identify the cipher from the evidence.
+2. Determine the transformation required.
+3. Decrypt the recovered communication.
+4. Identify the compromised workstation.
+5. Construct and submit the corresponding BLACKOUT flag.
+
+The answer must be derived from the recovered evidence.

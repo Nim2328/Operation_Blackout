@@ -1,0 +1,28 @@
+BLACKOUT FORENSIC ARTIFACT
+CASE: BLACKOUT-FORENSIC-04
+SOURCE: Recovered service metadata
+HOST: OPS-WS-17
+
+[Unit]
+Description=System Time Synchronization Update
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/opt/blackout/updater
+Restart=always
+RestartSec=45
+
+[Install]
+WantedBy=multi-user.target
+
+[Metadata]
+UnitState=enabled
+LastStart=2026-08-18 22:58:01
+LastRestart=2026-08-18 23:02:46
+ProcessName=updater.exe
+
+[Analyst Fragment]
+The unit name resembles a legitimate system component.
+Review the executable referenced by ExecStart and correlate its
+execution time with the recovered host timeline.

@@ -1,0 +1,28 @@
+OPERATION BLACKOUT — CRYPTOGRAPHIC ANALYST NOTE
+================================================
+
+CASE ID: BLACKOUT-2026-001
+EVIDENCE ID: CRYPTO-002
+
+The encrypted communication recovered from the previous
+investigation stage does not appear to use modern encryption.
+
+Pattern analysis suggests a fixed alphabet substitution.
+
+Known characteristics:
+
+- The same plaintext character always produces the same
+  ciphertext character.
+- Word spacing has been preserved.
+- The message contains an underscore separating two
+  identifier components.
+- The ciphertext should be decoded using the appropriate
+  classical cipher.
+
+INVESTIGATOR TASK
+-----------------
+Determine the cipher being used, decrypt the recovered
+communication, and identify the compromised workstation.
+
+The workstation identifier is required to construct the
+BLACKOUT investigation flag.

@@ -1,0 +1,7 @@
+2026-08-18 22:46:12  https://intranet.blackout.local/dashboard
+2026-08-18 22:48:31  https://search.example.local/search?q=system+maintenance
+2026-08-18 22:55:09  https://files.blackout.local/shared/
+2026-08-18 22:56:44  https://files.blackout.local/shared/update.zip
+2026-08-18 22:57:02  https://files.blackout.local/download/update.zip
+2026-08-18 23:01:48  https://remote.blackout.local/login
+2026-08-18 23:02:03  https://remote.blackout.local/session

@@ -1,0 +1,26 @@
+BLACKOUT — CIPHER REFERENCE
+===========================
+
+REFERENCE ID: CRYPTO-REF-01
+
+Historical Cipher Clue
+----------------------
+A classical cipher associated with Julius Caesar shifts
+letters through the alphabet by a fixed number of positions.
+
+For this investigation, the encryption shift is:
+
+SHIFT: 13
+
+Example:
+
+A -> N
+B -> O
+C -> P
+
+The transformation is reversible using the same shift.
+
+Analyst Guidance
+----------------
+Apply the transformation to the recovered ciphertext
+without changing spaces or underscores.

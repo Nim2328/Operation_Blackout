@@ -1,0 +1,37 @@
+BLACKOUT — NETWORK ANALYSIS EVIDENCE 04
+========================================
+
+Evidence Type:
+Network Flow Behaviour
+
+Observed source:
+192.168.10.25
+
+Observed destination:
+10.20.30.50
+
+Destination port:
+8080
+
+Behaviour:
+Repeated TCP communication at approximately 60-second
+intervals.
+
+Investigation Task:
+Validate the timing and communication pattern using the
+packet capture.
+
+Recommended commands:
+
+    tshark -r network_capture.pcap \
+      -T fields \
+      -e frame.time_relative \
+      -e ip.src \
+      -e ip.dst \
+      -e tcp.dstport
+
+Investigate whether the repeated communication is consistent
+with periodic beaconing behaviour.
+
+Correlate:
+Source + Destination + Port + Timing

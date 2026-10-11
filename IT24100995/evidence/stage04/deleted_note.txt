@@ -1,0 +1,26 @@
+RECOVERED FILE - PARTIAL CONTENT
+
+File: /home/analyst/.cache/.maintenance_note
+Status: Deleted
+Recovered by forensic analysis.
+
+[Maintenance]
+The update package was not part of the scheduled maintenance window.
+
+Package: update.zip
+Source: files.blackout.local
+Downloaded: 2026-08-18 22:57:02
+
+[Analyst Note]
+The package was executed shortly after download.
+The temporary process was observed as:
+
+updater.exe
+
+A connection was later established with:
+remote.blackout.local
+
+Investigation reference:
+BLACKOUT-FORENSIC-04
+
+Do not trust the maintenance explanation.

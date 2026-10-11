@@ -1,0 +1,31 @@
+BLACKOUT — NETWORK ANALYSIS EVIDENCE 02
+========================================
+
+Evidence Type:
+DNS Query Analysis
+
+Extracted DNS observations:
+
+Query Type: A
+Repeated Query:
+cdn-sync.blackout-update.net
+
+Resolved Address:
+10.20.30.50
+
+Investigation Task:
+Verify the DNS relationship independently from the packet
+capture.
+
+Recommended tools:
+
+    tshark -r network_capture.pcap -Y "dns"
+    tshark -r network_capture.pcap -T fields \
+      -e dns.qry.name -e dns.a
+
+Determine:
+1. Which external hostname is contacted?
+2. Which IP address does it resolve to?
+3. Does the same destination appear in subsequent traffic?
+
+Use the result as an IOC for further correlation.

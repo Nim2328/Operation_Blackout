@@ -1,0 +1,25 @@
+BLACKOUT FORENSIC ANALYSIS ARTIFACT
+CASE: BLACKOUT-FORENSIC-04
+FILE: /opt/blackout/updater
+
+[File Metadata]
+Type: ELF 64-bit executable
+Purpose: Blackout update utility
+
+[Recovered Strings]
+BLACKOUT_UPDATE_AGENT
+REMOTE_HOST=remote.blackout.local
+REMOTE_PORT=443
+PERSISTENCE_MODE=SYSTEMD
+SERVICE_NAME=systemd-timesync-update.service
+RESTART_POLICY=ALWAYS
+
+[Encoded Investigation Data]
+RkxBR3t1cGRhdGVfc2VydmljZX0=
+
+[Analyst Guidance]
+The encoded value is associated with the persistence mechanism
+identified during the investigation.
+
+Decode the value using an appropriate encoding utility.
+Do not modify the recovered value.
