@@ -1,0 +1,30 @@
+.....                                                                    [100%]
+=============================== warnings summary ===============================
+test_ctf_behaviour.py::test_wrong_flag_rejected
+test_ctf_behaviour.py::test_correct_flag_completes_stage
+test_ctf_behaviour.py::test_correct_flag_unlocks_next_stage
+test_ctf_behaviour.py::test_duplicate_submission_does_not_award_extra_points
+test_ctf_behaviour.py::test_locked_stage_access_blocked
+  /home/kali/Projects/operation_blackout/.venv/lib/python3.14/site-packages/sqlalchemy/sql/schema.py:3627: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    return util.wrap_callable(lambda ctx: fn(), fn)  # type: ignore
+
+test_ctf_behaviour.py::test_wrong_flag_rejected
+test_ctf_behaviour.py::test_correct_flag_completes_stage
+test_ctf_behaviour.py::test_correct_flag_unlocks_next_stage
+test_ctf_behaviour.py::test_duplicate_submission_does_not_award_extra_points
+test_ctf_behaviour.py::test_duplicate_submission_does_not_award_extra_points
+test_ctf_behaviour.py::test_locked_stage_access_blocked
+  /tmp/tmp.nkurbFAnFc/routes/stages.py:34: LegacyAPIWarning: The Query.get() method is considered legacy as of the 1.x series of SQLAlchemy and becomes a legacy construct in 2.0. The method is now available as Session.get() (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+    user = User.query.get(user_id)
+
+test_ctf_behaviour.py::test_correct_flag_completes_stage
+test_ctf_behaviour.py::test_correct_flag_unlocks_next_stage
+test_ctf_behaviour.py::test_duplicate_submission_does_not_award_extra_points
+  /tmp/tmp.nkurbFAnFc/routes/stages.py:89: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    progress.completed_at = datetime.utcnow()
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+5 passed, 14 warnings in 1.04s
+
+Test exit status: 0
+Database used: temporary isolated copy

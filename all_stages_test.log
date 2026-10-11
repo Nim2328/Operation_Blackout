@@ -1,0 +1,21 @@
+.                                                                        [100%]
+=============================== warnings summary ===============================
+test_all_stages.py::test_all_eight_stages_sequentially
+  /home/kali/Projects/operation_blackout/.venv/lib/python3.14/site-packages/sqlalchemy/sql/schema.py:3627: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    return util.wrap_callable(lambda ctx: fn(), fn)  # type: ignore
+
+test_all_stages.py: 16 warnings
+  /tmp/blackout_fulltest_of74f5sk/source/routes/stages.py:34: LegacyAPIWarning: The Query.get() method is considered legacy as of the 1.x series of SQLAlchemy and becomes a legacy construct in 2.0. The method is now available as Session.get() (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+
+test_all_stages.py::test_all_eight_stages_sequentially
+test_all_stages.py::test_all_eight_stages_sequentially
+test_all_stages.py::test_all_eight_stages_sequentially
+test_all_stages.py::test_all_eight_stages_sequentially
+test_all_stages.py::test_all_eight_stages_sequentially
+test_all_stages.py::test_all_eight_stages_sequentially
+test_all_stages.py::test_all_eight_stages_sequentially
+test_all_stages.py::test_all_eight_stages_sequentially
+  /tmp/blackout_fulltest_of74f5sk/source/routes/stages.py:89: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+1 passed, 25 warnings in 1.13s

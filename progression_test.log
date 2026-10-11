@@ -1,0 +1,12 @@
+Investigator already exists: TEAM-07
+
+INVESTIGATION PROGRESS
+======================
+Stage 01 | OSINT                  | unlocked   | 0 points
+Stage 02 | STEGANOGRAPHY          | locked     | 0 points
+Stage 03 | CRYPTOGRAPHY           | locked     | 0 points
+Stage 04 | DIGITAL FORENSICS      | locked     | 0 points
+Stage 05 | NETWORK ANALYSIS       | locked     | 0 points
+Stage 06 | MEMORY FORENSICS       | locked     | 0 points
+Stage 07 | PRIVILEGE ESCALATION   | locked     | 0 points
+Stage 08 | REVERSE ENGINEERING    | locked     | 0 points

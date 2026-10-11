@@ -1,0 +1,11 @@
+Operation Blackout - Reset/Recovery Review
+
+Review result: NOT IMPLEMENTED / NOT VERIFIED
+
+The reviewed routes/stages.py and services/progression_service.py
+do not expose a dedicated reset or recovery operation.
+
+initialize_user_progress() creates missing progress records but
+does not reset completed stages or clear awarded scores.
+
+No reset/recovery PASS is claimed.
