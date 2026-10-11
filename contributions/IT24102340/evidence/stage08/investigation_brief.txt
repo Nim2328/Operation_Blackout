@@ -1,0 +1,23 @@
+BLACKOUT INCIDENT - FINAL INVESTIGATION BRIEF
+=============================================
+
+Case Reference:
+BLACKOUT-RE-08
+
+The recovered executable is believed to contain the final
+validation mechanism used by the BLACKOUT threat actor.
+
+Your task is to perform reverse engineering on the supplied
+ELF executable and determine:
+
+- what input the program expects,
+- how the input is transformed or checked,
+- which validation condition must be satisfied.
+
+Use static and dynamic analysis to correlate the program
+behaviour with the BLACKOUT investigation.
+
+The final investigation flag must be recovered from your
+analysis of the executable.
+
+The flag is not provided directly in this brief.

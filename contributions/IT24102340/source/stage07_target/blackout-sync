@@ -1,0 +1,8 @@
+#!/bin/bash
+
+echo "[BLACKOUT] Synchronization service started"
+echo "[BLACKOUT] Running as: $(id -u):$(id -g)"
+
+while true; do
+    sleep 60
+done

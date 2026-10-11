@@ -1,0 +1,26 @@
+OPERATION BLACKOUT - FINAL ANALYST BRIEF
+========================================
+
+Stage 08 investigation has established the following:
+
+1. The recovered artifact is an ELF executable.
+2. The executable performs a reversible XOR-based input transformation.
+3. The embedded validation bytes can be reversed to recover the
+   required validation token.
+4. The recovered token was successfully validated.
+5. Successful validation produced:
+
+       BLACKOUT CASE: FINAL-08
+
+Final case identifier:
+
+       BLACKOUT-FINAL-08
+
+Analyst instruction:
+
+Construct the Stage 08 flag from the confirmed final case result.
+
+Do NOT submit the recovered validation token as the flag.
+
+The validation token proves the reverse-engineering step.
+The BLACKOUT case identifier establishes the final investigation result.

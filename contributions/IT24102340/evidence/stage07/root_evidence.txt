@@ -1,0 +1,34 @@
+BLACKOUT INCIDENT - ROOT LEVEL CORRELATION
+===========================================
+
+Correlated findings:
+
+[1] Compromised account
+    analyst
+
+[2] Writable resource
+    /opt/blackout/
+
+[3] Privileged execution
+    blackout-sync.service executes as root
+
+[4] Privileged executable
+    /usr/local/bin/blackout-helper is SUID root
+
+[5] Historical activity
+    The analyst inspected the service definition and writable directory
+    immediately before elevated activity.
+
+Final investigation finding:
+
+The primary escalation path is associated with a privileged service
+executing a resource from a directory controlled by the compromised
+account.
+
+Case identifier:
+    BLACKOUT-PRIV-07
+
+Analyst instruction:
+
+Use the complete correlation chain to determine the Stage 07 flag.
+The case identifier is not itself the flag.
