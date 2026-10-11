@@ -1,0 +1,26 @@
+BLACKOUT — NETWORK ANALYSIS EVIDENCE 01
+========================================
+
+Evidence Type:
+Full Packet Capture
+
+File:
+network_capture.pcap
+
+Investigation Task:
+Analyse the packet capture using Wireshark or tshark.
+
+Recommended investigation:
+    tshark -r network_capture.pcap
+    tshark -r network_capture.pcap -Y "dns"
+    tshark -r network_capture.pcap -Y "http"
+
+Identify:
+- Internal source workstation
+- External destination
+- DNS activity
+- Repeated connections
+- Application-layer protocols
+
+Do not submit an indicator directly.
+Use the findings to correlate the remaining evidence.

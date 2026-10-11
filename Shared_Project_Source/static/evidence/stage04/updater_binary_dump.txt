@@ -1,0 +1,26 @@
+BLACKOUT FORENSIC ARTIFACT
+CASE: BLACKOUT-FORENSIC-04
+RECOVERED PATH: /opt/blackout/updater
+
+[ELF Metadata]
+Architecture: x86-64
+Type: dynamically linked executable
+
+[Recovered Strings]
+/opt/blackout/updater
+systemd-timesync-update.service
+remote.blackout.local
+USER_AGENT=BlackoutUpdater/1.4
+UPDATE_CHANNEL=stable
+/tmp/cache_update
+
+[Candidate Encoded Data]
+U0VDUkVUX0RFQ09Z
+RkxBR3t1cGRhdGVfc2VydmljZX0=
+Q0xFQU5fVVBERVRFUg==
+
+[Analyst Note]
+Several encoded strings were recovered from the executable.
+Not every recovered value is necessarily related to the incident.
+Correlate each value with the service configuration and execution
+timeline before decoding.

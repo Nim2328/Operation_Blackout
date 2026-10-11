@@ -1,0 +1,23 @@
+OPERATION BLACKOUT — INCIDENT NOTE
+===================================
+
+CASE ID: BLACKOUT-2026-001
+
+At 23:47 UTC, monitoring detected outbound communication
+from an unknown external infrastructure source.
+
+The activity was later associated with a suspected campaign
+identified internally as NIGHTFALL.
+
+Two infrastructure indicators were recovered:
+
+  nightfall-update.example
+  cdn-nightfall.example
+
+Investigators must determine which infrastructure indicator
+was used as the primary operational endpoint.
+
+Do not assume that the first discovered indicator is the
+primary endpoint.
+
+Correlate the available evidence before submitting a flag.

@@ -1,0 +1,33 @@
+BLACKOUT — RECOVERED ENCRYPTED COMMUNICATION
+=============================================
+
+CASE ID: BLACKOUT-2026-001
+EVIDENCE ID: CRYPTO-001
+
+Source:
+Recovered from the hidden data extracted from the Stage 02
+suspicious image.
+
+Encrypted Message
+-----------------
+GUR JBE XFGNGVBA JNF BCF_JF_17
+
+Analyst Note
+------------
+The recovered communication appears to use a classical
+substitution technique.
+
+The message is believed to identify a compromised workstation.
+
+Do not submit the ciphertext directly.
+Decrypt the message and identify the workstation referenced
+by the recovered communication.
+
+Investigation Answer
+--------------------
+The decrypted communication identifies the compromised
+workstation.
+
+Determine the workstation identifier from the decrypted
+message and submit the corresponding CTF flag through the
+platform.

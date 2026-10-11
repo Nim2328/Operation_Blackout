@@ -1,0 +1,45 @@
+BLACKOUT — NETWORK ANALYSIS EVIDENCE 06
+========================================
+
+Network IOC Reference
+
+Potential Indicators:
+
+Hostname:
+cdn-sync.blackout-update.net
+
+IP:
+10.20.30.50
+
+Port:
+8080
+
+Internal Host:
+OPS-WS-17
+
+Observed Behaviours:
+
+- periodic outbound communication
+- HTTP POST requests
+- host identification
+- task retrieval
+- local file collection
+- outbound file transfer
+
+Investigation Task:
+
+Use the packet capture to validate whether these indicators
+belong to the same communication channel.
+
+A single IOC is not sufficient.
+
+The investigation conclusion should be based on correlation
+between multiple independent network indicators.
+
+Final Question:
+
+What type of attacker infrastructure is represented by the
+correlated communication?
+
+Convert the investigation conclusion into the required
+BLACKOUT flag format before submission.

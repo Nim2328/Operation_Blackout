@@ -1,0 +1,22 @@
+BLACKOUT — TLS CERTIFICATE ANALYSIS
+===================================
+
+Certificate Subject:
+CN=nightfall-update.example
+
+Certificate Serial:
+NF-2026-0910-27
+
+Validity:
+2026-08-01 to 2026-10-01
+
+Observed IP:
+198.51.100.27
+
+Analyst Note
+------------
+The certificate was observed on the infrastructure that
+maintained continuous availability during the incident window.
+
+No matching certificate was recovered for the secondary
+indicator.

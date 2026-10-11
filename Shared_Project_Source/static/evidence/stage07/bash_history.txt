@@ -1,0 +1,20 @@
+BLACKOUT INCIDENT - RECOVERED COMMAND HISTORY
+==============================================
+
+analyst@ops-ws-17:~$ cd /opt/blackout
+analyst@ops-ws-17:/opt/blackout$ ls -la
+analyst@ops-ws-17:/opt/blackout$ cp blackout-sync blackout-sync.bak
+analyst@ops-ws-17:/opt/blackout$ strings /usr/local/bin/blackout-helper
+analyst@ops-ws-17:/opt/blackout$ systemctl status blackout-sync
+analyst@ops-ws-17:/opt/blackout$ cat /etc/systemd/system/blackout-sync.service
+analyst@ops-ws-17:/opt/blackout$ ls -la /opt/blackout
+analyst@ops-ws-17:/opt/blackout$ ./blackout-sync --test
+analyst@ops-ws-17:/opt/blackout$ id
+
+Important observation:
+
+The account inspected the service configuration and the writable service
+directory shortly before elevated activity was recorded.
+
+The command sequence indicates deliberate discovery of a privileged
+execution path.

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Stage {{ "%02d"|format(stage.stage_number) }}
+        | Operation Blackout
+    </title>
+</head>
+
+<body>
+
+    <h1>OPERATION BLACKOUT</h1>
+
+    <h2>
+        STAGE {{ "%02d"|format(stage.stage_number) }}
+        — {{ stage.name }}
+    </h2>
+
+    <p>
+        <strong>Domain:</strong>
+        {{ stage.domain }}
+    </p>
+
+    <p>
+        {{ stage.description }}
+    </p>
+
+    <hr>
+
+    <h3>Investigation Status</h3>
+
+    <p>
+        <strong>Status:</strong>
+        {{ progress.status }}
+    </p>
+
+    <p>
+        <strong>Attempts:</strong>
+        {{ progress.attempts }}
+    </p>
+
+    <p>
+        <strong>Points:</strong>
+        {{ progress.score_awarded }}
+    </p>
+
+    {% if message %}
+
+        <div>
+
+            <strong>
+                {{ message }}
+            </strong>
+
+        </div>
+
+    {% endif %}
+
+    {% if progress.status != "completed" %}
+
+        <hr>
+
+        <h3>Submit Flag</h3>
+
+        <form
+            method="POST"
+            action="{{ url_for('stages.stage', stage_number=stage.stage_number) }}"
+        >
+
+            <label for="flag">
+                Enter captured flag:
+            </label>
+
+            <br><br>
+
+            <input
+                type="text"
+                id="flag"
+                name="flag"
+                placeholder="FLAG{...}"
+                required
+                autocomplete="off"
+            >
+
+            <br><br>
+
+            <button type="submit">
+                Submit Flag
+            </button>
+
+        </form>
+
+    {% else %}
+
+        <hr>
+
+        <h3>Stage Completed</h3>
+
+        <p>
+            This investigation stage has been successfully completed.
+        </p>
+
+        {% if stage.stage_number < 8 %}
+
+            <p>
+                The next investigation stage is now unlocked.
+            </p>
+
+            <a
+                href="{{ url_for('stages.stage', stage_number=stage.stage_number + 1) }}"
+            >
+                Continue to Next Stage
+            </a>
+
+        {% else %}
+
+            <p>
+                Operation Blackout investigation completed.
+            </p>
+
+        {% endif %}
+
+    {% endif %}
+
+    <hr>
+
+    <p>
+        <a href="{{ url_for('dashboard.dashboard') }}">
+            Back to Dashboard
+        </a>
+    </p>
+
+</body>
+
+</html>

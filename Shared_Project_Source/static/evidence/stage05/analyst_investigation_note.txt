@@ -1,0 +1,32 @@
+BLACKOUT — NETWORK ANALYSIS EVIDENCE 05
+========================================
+
+Analyst Investigation Note
+
+The workstation OPS-WS-17 was observed communicating with an
+external destination following a repeated pattern.
+
+The communication includes:
+
+- periodic check-in traffic,
+- task retrieval,
+- collection of a local log file,
+- outbound transfer activity.
+
+Investigation Objective:
+
+Determine whether the observed communication represents
+normal application behaviour or command-and-control activity.
+
+Do not rely on this note alone.
+
+Correlate the observations with:
+
+1. DNS resolution
+2. TCP destination and port
+3. HTTP requests
+4. Communication timing
+5. Task and upload behaviour
+
+The final investigation answer must be derived from the
+network evidence.

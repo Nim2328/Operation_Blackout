@@ -1,0 +1,22 @@
+BLACKOUT INCIDENT - HOST TRIAGE
+================================
+
+Host: ops-ws-17
+Operating System: Ubuntu Linux 24.04
+Hostname: ops-ws-17
+Primary User: analyst
+Observed Privilege: standard user
+
+Initial findings:
+
+1. User "analyst" was logged in when the suspicious activity occurred.
+2. A process named "blackout-sync" was observed running from /opt/blackout/.
+3. The /opt/blackout/ directory has unexpected write permissions.
+4. A privileged service references a resource inside /opt/blackout/.
+5. An unusual SUID executable named "blackout-helper" exists on the host.
+
+Investigation note:
+
+Do not assume the SUID executable alone explains the compromise.
+Correlate the process, filesystem permissions and privileged service
+configuration before identifying the escalation path.

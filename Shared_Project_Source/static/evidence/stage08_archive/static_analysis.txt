@@ -1,0 +1,31 @@
+OPERATION BLACKOUT - STATIC ANALYSIS
+====================================
+
+Target:
+    blackout_loader
+
+Initial observations:
+
+The executable is a 64-bit Linux ELF binary.
+
+Notable printable strings include:
+
+    BLACKOUT LOADER v1.0
+    Enter validation token:
+    VALIDATION ACCEPTED
+    BLACKOUT CASE: FINAL-08
+    VALIDATION FAILED
+
+The expected validation value is not directly displayed as a normal
+printable string.
+
+The program accepts user input and performs a transformation before
+comparing the transformed value against an embedded byte sequence.
+
+Analyst conclusion:
+
+The validation token must be recovered by reversing the transformation
+implemented inside the executable.
+
+The accepted validation result provides an important case identifier,
+but the recovered input itself is not the final flag.

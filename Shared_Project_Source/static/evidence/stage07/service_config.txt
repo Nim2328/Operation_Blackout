@@ -1,0 +1,35 @@
+BLACKOUT INCIDENT - SERVICE CONFIGURATION
+==========================================
+
+Service:
+    blackout-sync.service
+
+Unit configuration:
+
+[Unit]
+Description=BLACKOUT Synchronization Service
+After=network.target
+
+[Service]
+Type=simple
+User=root
+ExecStart=/opt/blackout/blackout-sync --service
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+
+Security observations:
+
+1. The service executes as root.
+2. ExecStart points to /opt/blackout/blackout-sync.
+3. /opt/blackout/ is writable by the analyst account.
+4. The executable referenced by ExecStart is not located in a protected
+   root-only directory.
+
+Investigation conclusion:
+
+The service configuration creates a privileged execution path involving
+a resource controlled by a lower-privileged account.
+
+Determine how the attacker could abuse this relationship.

@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Investigation Dashboard | Operation Blackout
+    </title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+
+            min-height: 100vh;
+
+            background: #080b10;
+
+            color: #e6edf3;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+        }
+
+        /* =========================
+           TOP BAR
+        ========================== */
+
+        .topbar {
+
+            border-bottom: 1px solid #30363d;
+
+            background: #0d1117;
+
+            padding: 18px 35px;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            gap: 20px;
+        }
+
+        .brand {
+
+            color: #7ee787;
+
+            font-weight: bold;
+
+            letter-spacing: 2px;
+        }
+
+        .investigator {
+
+            color: #8b949e;
+
+            font-size: 14px;
+        }
+
+        .investigator strong {
+
+            color: #e6edf3;
+        }
+
+        .logout {
+
+            color: #ff7b72;
+
+            text-decoration: none;
+
+            font-weight: bold;
+        }
+
+        .logout:hover {
+
+            color: #ffaaa5;
+        }
+
+        /* =========================
+           MAIN CONTAINER
+        ========================== */
+
+        .container {
+
+            max-width: 1200px;
+
+            margin: 40px auto;
+
+            padding: 0 25px;
+        }
+
+        .classification {
+
+            color: #7ee787;
+
+            font-size: 12px;
+
+            letter-spacing: 2px;
+        }
+
+        h1 {
+
+            margin: 8px 0;
+
+            font-size: 34px;
+        }
+
+        .subtitle {
+
+            color: #8b949e;
+
+            line-height: 1.6;
+        }
+
+        /* =========================
+           STATISTICS
+        ========================== */
+
+        .stats {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 18px;
+
+            margin: 35px 0;
+        }
+
+        .stat {
+
+            background: #0d1117;
+
+            border: 1px solid #30363d;
+
+            border-radius: 8px;
+
+            padding: 22px;
+        }
+
+        .stat-label {
+
+            color: #8b949e;
+
+            font-size: 12px;
+
+            letter-spacing: 1px;
+        }
+
+        .stat-value {
+
+            font-size: 30px;
+
+            margin-top: 10px;
+
+            font-weight: bold;
+
+            color: #e6edf3;
+        }
+
+        /* =========================
+           SECTION TITLE
+        ========================== */
+
+        .section-title {
+
+            margin-top: 35px;
+
+            margin-bottom: 18px;
+
+            font-size: 22px;
+        }
+
+        /* =========================
+           STAGE GRID
+        ========================== */
+
+        .stages {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 18px;
+        }
+
+        .stage {
+
+            background: #0d1117;
+
+            border: 1px solid #30363d;
+
+            border-radius: 8px;
+
+            padding: 22px;
+
+            transition:
+                border-color 0.2s ease,
+                transform 0.2s ease;
+        }
+
+        .stage:hover {
+
+            border-color: #4b5563;
+
+            transform: translateY(-2px);
+        }
+
+        .stage-number {
+
+            color: #8b949e;
+
+            font-size: 12px;
+
+            letter-spacing: 1px;
+        }
+
+        .stage-name {
+
+            font-size: 20px;
+
+            font-weight: bold;
+
+            margin: 8px 0;
+        }
+
+        .stage-domain {
+
+            color: #8b949e;
+
+            font-size: 12px;
+
+            margin-bottom: 15px;
+
+            letter-spacing: 1px;
+        }
+
+        .stage-description {
+
+            color: #b1bac4;
+
+            line-height: 1.7;
+
+            min-height: 55px;
+        }
+
+        /* =========================
+           STATUS
+        ========================== */
+
+        .status {
+
+            display: inline-block;
+
+            padding: 6px 10px;
+
+            border-radius: 4px;
+
+            font-size: 11px;
+
+            font-weight: bold;
+
+            letter-spacing: 1px;
+        }
+
+        .completed {
+
+            background: #1f6f43;
+
+            color: #7ee787;
+        }
+
+        .unlocked {
+
+            background: #3b2f00;
+
+            color: #d29922;
+        }
+
+        .locked {
+
+            background: #21262d;
+
+            color: #8b949e;
+        }
+
+        /* =========================
+           STAGE ACTION
+        ========================== */
+
+        .stage-actions {
+
+            margin-top: 20px;
+
+            padding-top: 18px;
+
+            border-top: 1px solid #21262d;
+        }
+
+        .stage-button {
+
+            display: inline-block;
+
+            padding: 11px 18px;
+
+            border: 1px solid #30363d;
+
+            border-radius: 5px;
+
+            text-decoration: none;
+
+            font-size: 13px;
+
+            font-weight: bold;
+
+            letter-spacing: 0.5px;
+        }
+
+        .stage-button.available {
+
+            background: #102338;
+
+            border-color: #3b82f6;
+
+            color: #93c5fd;
+        }
+
+        .stage-button.available:hover {
+
+            background: #173554;
+
+            border-color: #60a5fa;
+        }
+
+        .stage-button.completed-button {
+
+            background: #0d2417;
+
+            border-color: #22c55e;
+
+            color: #86efac;
+        }
+
+        .stage-button.completed-button:hover {
+
+            background: #123a21;
+        }
+
+        .stage-button.locked-button {
+
+            background: #161b22;
+
+            border-color: #30363d;
+
+            color: #6e7681;
+
+            cursor: not-allowed;
+        }
+
+        /* =========================
+           EMPTY STATE
+        ========================== */
+
+        .empty {
+
+            background: #0d1117;
+
+            border: 1px solid #30363d;
+
+            padding: 25px;
+
+            color: #8b949e;
+        }
+
+        /* =========================
+           FOOTER
+        ========================== */
+
+        .footer {
+
+            margin-top: 35px;
+
+            padding-top: 20px;
+
+            border-top: 1px solid #21262d;
+
+            color: #6e7681;
+
+            font-size: 12px;
+
+            line-height: 1.6;
+        }
+
+        /* =========================
+           MOBILE
+        ========================== */
+
+        @media (max-width: 700px) {
+
+            .topbar {
+
+                padding: 18px 20px;
+
+                flex-direction: column;
+
+                align-items: flex-start;
+            }
+
+            .container {
+
+                margin: 25px auto;
+
+                padding: 0 18px;
+            }
+
+            .stats {
+
+                grid-template-columns: 1fr;
+            }
+
+            .stages {
+
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+
+                font-size: 28px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     TOP BAR
+========================== -->
+
+<header class="topbar">
+
+    <div class="brand">
+
+        OPERATION BLACKOUT
+
+    </div>
+
+
+    <div class="investigator">
+
+        Investigator:
+
+        <strong>
+            {{ user.username }}
+        </strong>
+
+        &nbsp; | &nbsp;
+
+        <a
+            class="logout"
+            href="{{ url_for('auth.logout') }}"
+        >
+            LOGOUT
+        </a>
+
+    </div>
+
+</header>
+
+
+<!-- =========================
+     MAIN
+========================== -->
+
+<main class="container">
+
+
+    <div class="classification">
+
+        CLASSIFIED // ACTIVE INVESTIGATION
+
+    </div>
+
+
+    <h1>
+
+        Investigation Dashboard
+
+    </h1>
+
+
+    <p class="subtitle">
+
+        Case
+        <strong>BLACKOUT-2026-001</strong>
+
+        <br>
+
+        Investigation Team:
+        <strong>{{ user.team_name }}</strong>
+
+    </p>
+
+
+    <!-- =========================
+         STATISTICS
+    ========================== -->
+
+    <section class="stats">
+
+
+        <div class="stat">
+
+            <div class="stat-label">
+
+                STAGES COMPLETED
+
+            </div>
+
+
+            <div class="stat-value">
+
+                {{ completed_count }} / 8
+
+            </div>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div class="stat-label">
+
+                INVESTIGATION SCORE
+
+            </div>
+
+
+            <div class="stat-value">
+
+                {{ score }} / 800
+
+            </div>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div class="stat-label">
+
+                INVESTIGATION STATUS
+
+            </div>
+
+
+            <div class="stat-value">
+
+                {% if completed_count == 8 %}
+
+                    COMPLETE
+
+                {% else %}
+
+                    ACTIVE
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+
+    <section class="stat" style="margin-bottom:25px;">
+        <h2 style="font-size:18px;">Reset Investigation Progress</h2>
+        <p class="subtitle">
+            This resets your stage status, attempts and score.
+            Your account and other investigators' progress remain unchanged.
+        </p>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% for category, message in messages %}
+            <p role="status">{{ message }}</p>
+          {% endfor %}
+        {% endwith %}
+        <form method="POST"
+              action="{{ url_for('dashboard.reset_progress') }}"
+              onsubmit="return confirm('Reset your entire investigation progress? This cannot be undone.');">
+            <input type="hidden" name="confirm_reset" value="RESET">
+            <button type="submit"
+                    style="padding:10px 16px;background:#7f1d1d;color:white;border:1px solid #ef4444;border-radius:5px;cursor:pointer;">
+                Reset My Progress
+            </button>
+        </form>
+    </section>
+
+    <!-- =========================
+         STAGES
+    ========================== -->
+
+    <h2 class="section-title">
+
+        Investigation Stages
+
+    </h2>
+
+
+    {% if progress_records %}
+
+
+        <section class="stages">
+
+
+            {% for progress in progress_records %}
+
+
+                <div class="stage">
+
+
+                    <!-- Stage number -->
+
+                    <div class="stage-number">
+
+                        STAGE
+                        {{ "%02d"|format(
+                            progress.stage.stage_number
+                        ) }}
+
+                    </div>
+
+
+                    <!-- Stage name -->
+
+                    <div class="stage-name">
+
+                        {{ progress.stage.name }}
+
+                    </div>
+
+
+                    <!-- Domain -->
+
+                    <div class="stage-domain">
+
+                        {{ progress.stage.domain }}
+
+                    </div>
+
+
+                    <!-- Status -->
+
+                    {% if progress.status == "completed" %}
+
+
+                        <span class="status completed">
+
+                            COMPLETED
+
+                        </span>
+
+
+                    {% elif progress.status == "unlocked" %}
+
+
+                        <span class="status unlocked">
+
+                            AVAILABLE
+
+                        </span>
+
+
+                    {% else %}
+
+
+                        <span class="status locked">
+
+                            LOCKED
+
+                        </span>
+
+
+                    {% endif %}
+
+
+                    <!-- Description -->
+
+                    <p class="stage-description">
+
+                        {{ progress.stage.description }}
+
+                    </p>
+
+
+                    <!-- Action -->
+
+                    <div class="stage-actions">
+
+
+                        {% if progress.status == "completed" %}
+
+
+                            <a
+                                class="stage-button completed-button"
+                                href="{{ url_for(
+                                    'stages.stage',
+                                    stage_number=progress.stage.stage_number
+                                ) }}"
+                            >
+
+                                REVIEW STAGE
+
+                            </a>
+
+
+                        {% elif progress.status == "unlocked" %}
+
+
+                            <a
+                                class="stage-button available"
+                                href="{{ url_for(
+                                    'stages.stage',
+                                    stage_number=progress.stage.stage_number
+                                ) }}"
+                            >
+
+                                START STAGE
+
+                            </a>
+
+
+                        {% else %}
+
+
+                            <span
+                                class="stage-button locked-button"
+                            >
+
+                                STAGE LOCKED
+
+                            </span>
+
+
+                        {% endif %}
+
+
+                    </div>
+
+
+                </div>
+
+
+            {% endfor %}
+
+
+        </section>
+
+
+    {% else %}
+
+
+        <div class="empty">
+
+            No investigation stages are currently
+            assigned to this investigator.
+
+        </div>
+
+
+    {% endif %}
+
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+
+    <div class="footer">
+
+        OPERATION BLACKOUT
+
+        <br>
+
+        BLACKOUT-2026-001
+
+        <br>
+
+        Authorized investigators only.
+
+    </div>
+
+
+</main>
+
+
+</body>
+
+</html>
+

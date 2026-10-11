@@ -1,0 +1,26 @@
+BLACKOUT INCIDENT - FILESYSTEM PERMISSION ANALYSIS
+===================================================
+
+Directory permissions:
+
+drwxrwxr-x  analyst  analyst  /opt/blackout
+
+Files:
+
+-rwxrwxr-x  analyst  analyst  /opt/blackout/blackout-sync
+-rw-rw-r--  analyst  analyst  /opt/blackout/config.ini
+-rw-r--r--  root     root     /opt/blackout/README.txt
+
+Important observation:
+
+The analyst account has write access to the directory used by the
+BLACKOUT synchronization service.
+
+The service executes with elevated privileges.
+
+Investigation question:
+
+If a privileged service executes a resource from a directory writable
+by a low-privileged user, what security boundary has been violated?
+
+Do not stop here. Confirm the relationship using the service configuration.

@@ -1,0 +1,40 @@
+BLACKOUT — NETWORK ANALYSIS EVIDENCE 03
+========================================
+
+Evidence Type:
+HTTP / TCP Session Data
+
+Suspicious destination:
+10.20.30.50
+
+Observed service:
+TCP/8080
+
+Observed HTTP activity:
+
+POST /api/v1/checkin
+HOST=OPS-WS-17;ID=0003;STATUS=OK
+
+POST /api/v1/task
+CMD=COLLECT&PATH=/tmp/log
+
+POST /api/v1/upload
+FILE=incident.log;SIZE=2048;HASH=9f2c1a77
+
+Investigation Task:
+Do not simply classify the traffic from one request.
+
+Use the packet capture to reconstruct the communication.
+
+Recommended tools:
+
+    tshark -r network_capture.pcap -Y "http.request"
+    tshark -r network_capture.pcap -Y "tcp.port==8080"
+    tshark -r network_capture.pcap -z follow,tcp,ascii,0
+
+Determine:
+- What host initiated the communication?
+- What commands/tasks were requested?
+- Is information transferred back to the external host?
+
+Correlate these findings with the DNS IOC.

@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Operation Blackout</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: #080b10;
+            color: #e6edf3;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: auto;
+            padding: 60px 25px;
+        }
+
+        .classification {
+            color: #7ee787;
+            font-size: 13px;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 56px;
+            margin: 0 0 20px;
+            letter-spacing: 3px;
+        }
+
+        h1 span {
+            color: #7ee787;
+        }
+
+        .case {
+            color: #8b949e;
+            margin-bottom: 40px;
+        }
+
+        .panel {
+            background: #0d1117;
+            border: 1px solid #30363d;
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 25px;
+        }
+
+        h2 {
+            margin-top: 0;
+            color: #7ee787;
+        }
+
+        p {
+            line-height: 1.7;
+            color: #c9d1d9;
+        }
+
+        .timeline {
+            border-left: 2px solid #30363d;
+            padding-left: 25px;
+        }
+
+        .timeline div {
+            margin-bottom: 18px;
+        }
+
+        .time {
+            color: #7ee787;
+            font-family: monospace;
+        }
+
+        .warning {
+            border-left: 4px solid #d29922;
+            padding: 15px 20px;
+            background: #161b22;
+        }
+
+        .button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 14px 25px;
+            background: #238636;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="classification">
+        CLASSIFIED // SOC INCIDENT RESPONSE
+    </div>
+
+    <h1>
+        OPERATION <span>BLACKOUT</span>
+    </h1>
+
+    <div class="case">
+        CASE ID: BLACKOUT-2026-001
+        <br>
+        INCIDENT STATUS: CRITICAL
+    </div>
+
+    <div class="panel">
+
+        <h2>Incident Briefing</h2>
+
+        <p>
+            At 23:47, the security monitoring team detected
+            abnormal activity involving an internal workstation.
+        </p>
+
+        <p>
+            During the following investigation, analysts discovered
+            evidence indicating external infrastructure, hidden
+            information, encrypted communications, suspicious
+            network traffic and possible privilege escalation.
+        </p>
+
+        <p>
+            The investigation team has not yet determined who
+            initiated the attack, how the attacker gained access,
+            what information was targeted, or whether data was
+            successfully exfiltrated.
+        </p>
+
+        <p>
+            You have been assigned as the forensic investigation
+            team. Your task is to reconstruct the incident using
+            the evidence provided throughout the investigation.
+        </p>
+
+    </div>
+
+    <div class="panel">
+
+        <h2>Incident Timeline</h2>
+
+        <div class="timeline">
+
+            <div>
+                <span class="time">23:47</span>
+                Initial security anomaly detected.
+            </div>
+
+            <div>
+                <span class="time">00:12</span>
+                External infrastructure associated with the
+                incident is suspected.
+            </div>
+
+            <div>
+                <span class="time">00:31</span>
+                Suspicious file recovered.
+            </div>
+
+            <div>
+                <span class="time">00:48</span>
+                Encrypted communication discovered.
+            </div>
+
+            <div>
+                <span class="time">01:17</span>
+                Compromised workstation identified.
+            </div>
+
+            <div>
+                <span class="time">01:42</span>
+                Suspicious network traffic isolated.
+            </div>
+
+            <div>
+                <span class="time">02:05</span>
+                Memory image acquired.
+            </div>
+
+            <div>
+                <span class="time">02:39</span>
+                Possible privilege escalation discovered.
+            </div>
+
+            <div>
+                <span class="time">03:16</span>
+                Unknown executable recovered.
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="panel warning">
+
+        <strong>INVESTIGATION RULE</strong>
+
+        <p>
+            The investigation must be completed sequentially.
+            Each confirmed finding unlocks the next investigation
+            stage.
+        </p>
+
+        <p>
+            Direct access to locked stages is prohibited and is
+            enforced by the investigation server.
+        </p>
+
+    </div>
+
+    <a href="/health" class="button">
+        INITIALIZE INVESTIGATION
+    </a>
+
+</div>
+
+</body>
+</html>
